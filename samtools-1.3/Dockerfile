@@ -5,11 +5,11 @@ RUN apt-get update
 
 ENV SOURCE_DIR=~/app_sources/
 
-RUN cd ${SOURCE_DIR}
+WORKDIR ${SOURCE_DIR}
 RUN wget --no-clobber http://sourceforge.net/projects/samtools/files/samtools/1.3/samtools-1.3.tar.bz2
 RUN bunzip2 -f samtools-1.3.tar.bz2
 RUN tar xvf samtools-1.3.tar
-RUN cd samtools-1.3
+WORKDIR samtools-1.3
 RUN make
 RUN make install
 

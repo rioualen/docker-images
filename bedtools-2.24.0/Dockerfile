@@ -5,10 +5,10 @@ FROM rioualen/python-essentials:1.0
 
 ENV SOURCE_DIR=~/app_sources/
 
-RUN cd ${SOURCE_DIR}
+WORKDIR ${SOURCE_DIR}
 RUN wget --no-clobber https://github.com/arq5x/bedtools2/releases/download/v2.24.0/bedtools-2.24.0.tar.gz
 RUN tar xvfz bedtools-2.24.0.tar.gz
-RUN cd bedtools2
+WORKDIR bedtools2
 RUN make
 RUN make install
 
