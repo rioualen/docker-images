@@ -2,12 +2,16 @@ FROM ubuntu:14.04
 FROM rioualen/ubuntu-essentials:1.0
 
 
-ENV SOURCE_DIR=~/app_sources/
-ENV BIN_DIR=~/bin/
+ENV SOURCE_DIR=/root/app_sources/
+ENV BIN_DIR=/root/bin/
 
 
 WORKDIR ${SOURCE_DIR}
+RUN wget --no-clobber http://downloads.sourceforge.net/project/bowtie-bio/bowtie2/2.2.6/bowtie2-2.2.6-linux-x86_64.zip && unzip bowtie2-2.2.6-linux-x86_64.zip
 
-RUN wget --no-clobber http://downloads.sourceforge.net/project/bowtie-bio/bowtie2/2.2.6/bowtie2-2.2.6-linux-x86_64.zip;\
-RUN unzip bowtie2-2.2.6-linux-x86_64.zip;\
-RUN cp `find bowtie2-2.2.6/ -maxdepth 1 -executable -type f` ${BIN_DIR}
+WORKDIR ${BIN_DIR}
+RUN cp `find ${SOURCE_DIR}bowtie2-2.2.6/ -maxdepth 1 -executable -type f` .
+
+ENV PATH $PATH:/usr/local/bin
+
+MAINTAINER Claire Rioualen <claire.rioualen@inserm.fr>
